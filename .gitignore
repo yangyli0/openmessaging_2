@@ -1,0 +1,7 @@
+.idea
+target
+*.iml
+*.sh
+*.log
+src/main/java/io/openmessaging/tester
+src/test
