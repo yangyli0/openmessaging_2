@@ -100,12 +100,12 @@ public class DefaultKeyValue implements KeyValue {
         StringBuilder sb = new StringBuilder();
         for(Map.Entry<String, Object>entry: kvs.entrySet()) {
             sb.append(entry.getKey());
-            sb.append('#');
+            sb.append("#");
             sb.append(entry.getValue());
-            sb.append('|');
+            sb.append("|");
         }
         sb.deleteCharAt(sb.length()-1);
-        sb.append(',');
+        sb.append(",");
         return sb.toString().getBytes();
     }
 }

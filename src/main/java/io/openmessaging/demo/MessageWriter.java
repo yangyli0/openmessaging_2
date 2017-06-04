@@ -75,8 +75,17 @@ public class MessageWriter implements Runnable {
 
                 queueOrTopic = queueOrTopic.substring(1);
 
-                mapBuf.put((queueOrTopic+',').getBytes());
-                mapBuf.putInt(msgLen);
+                //mapBuf.put((queueOrTopic+',').getBytes());
+                //mapBuf.putInt(msgLen);
+
+                //mapBuf.put((queueOrTopic+","+msgLen+",").getBytes());
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(queueOrTopic);
+                sb.append(",");
+                sb.append(msgLen);
+                sb.append(",");
+                mapBuf.put(sb.toString().getBytes());
 
                 mapBuf.put(propertyBytes);
                 mapBuf.put(headerBytes);
