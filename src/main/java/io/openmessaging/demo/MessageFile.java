@@ -31,9 +31,11 @@ public class MessageFile {
 
     public void loadFile() {
         String absPath = properties.getString("STORE_PATH")+ "/" +fileName;
-        RandomAccessFile raf = null;
+        //RandomAccessFile raf = null;
+        BufferedRandomAccessFile raf = null;
         try {
-            raf = new RandomAccessFile(absPath, "r");
+            //raf = new RandomAccessFile(absPath, "r");
+            raf = new BufferedRandomAccessFile(absPath, "r");
             FileChannel fc = raf.getChannel();
 
             for (long i = 0; i < fc.size(); i += BUFFER_SIZE) { // i需要是long型，i 最后等于文件大小
