@@ -70,13 +70,16 @@ public class DefaultPullConsumer implements PullConsumer{
             byte[] tag = new byte[i-mapBuf.position()];
             mapBuf.get(tag, 0, tag.length);
             mapBuf.get();   // 跳过','
-            //int msgLen =mapBuf.getInt();
+            int msgLen =mapBuf.getInt();
+
+            /*
             i = mapBuf.position();
             for (; i < mapBuf.capacity() && mapBuf.get(i) !=44; i++);
             byte[] lenBytes = new byte[i - mapBuf.position()];
             mapBuf.get(lenBytes, 0, lenBytes.length);
             mapBuf.get();   //跳过','
             int msgLen = Integer.parseInt(new String(lenBytes));
+            */
 
 
             if (bucketList.contains(new String(tag))) { // 消息topic是当前消费者订阅的topic
