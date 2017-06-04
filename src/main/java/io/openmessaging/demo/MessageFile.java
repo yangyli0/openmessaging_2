@@ -29,9 +29,11 @@ public class MessageFile {
 
     public void loadFile() {
         String absPath = properties.getString("STORE_PATH")+"/" + fileName;
-        BufferedRandomAccessFile raf = null;
+        RandomAccessFile raf = null;
+        //BufferedRandomAccessFile raf = null;
         try {
-            raf = new BufferedRandomAccessFile(absPath, "r");
+            //raf = new BufferedRandomAccessFile(absPath, "r");
+            raf = new RandomAccessFile(absPath, "r");
             FileChannel fc = raf.getChannel();
             mappedByteBuffer = fc.map(FileChannel.MapMode.READ_ONLY, 0, BUFFER_SIZE);
         } catch (IOException e) { e.printStackTrace();}

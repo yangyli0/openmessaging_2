@@ -46,11 +46,11 @@ public class MessageWriter implements Runnable {
     public void run() {
         producerId = Thread.currentThread().getName();
         String absPath = properties.getString("STORE_PATH") + "/" + producerId;
-        //RandomAccessFile raf = null;
-        BufferedRandomAccessFile raf = null;
+        RandomAccessFile raf = null;
+        //BufferedRandomAccessFile raf = null;
         try {
-            //raf = new RandomAccessFile(absPath, "rw");
-            raf = new BufferedRandomAccessFile(absPath, "rw");
+            raf = new RandomAccessFile(absPath, "rw");
+            //raf = new BufferedRandomAccessFile(absPath, "rw");
             fc = raf.getChannel();
             mapBuf = fc.map(FileChannel.MapMode.READ_WRITE, 0, BUFFER_SIZE);    // TODO:保证只映射一次
         } catch (IOException e) { e.printStackTrace();}
