@@ -2,6 +2,7 @@ package io.openmessaging.demo;
 
 import io.openmessaging.KeyValue;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -12,12 +13,38 @@ import java.util.List;
 /**
  * Created by lee on 5/16/17.
  */
+
+public class MessageFile {
+    private KeyValue properties;
+    private String fileName;
+
+    private final int BUFFER_SIZE = 512 * 1024 * 1024;
+    MappedByteBuffer mappedByteBuffer = null;
+
+    public MessageFile(KeyValue properties, String fileName) {
+        this.properties = properties;
+        this.fileName = fileName;
+        loadFile();
+    }
+
+    public void loadFile() {
+        String absPath = properties.getString("STORE_PATH")+"/" + fileName;
+        BufferedRandomAccessFile raf = null;
+        try {
+            raf = new BufferedRandomAccessFile(absPath, "r");
+            FileChannel fc = raf.getChannel();
+            mappedByteBuffer = fc.map(FileChannel.MapMode.READ_ONLY, 0, BUFFER_SIZE);
+        } catch (IOException e) { e.printStackTrace();}
+    }
+}
+/*
 public class MessageFile {
     private KeyValue properties;
     private String fileName;
 
     private final int BUFFER_SIZE =  512 * 1024 * 1024;
     private List<MappedByteBuffer> mapBufList = new ArrayList<>();
+    //private MappedByteBuffer mapBuf = null;
 
     public MessageFile(KeyValue properties, String fileName) {
         this.properties = properties;
@@ -54,9 +81,8 @@ public class MessageFile {
 
     }
 
-
-
 }
+*/
 
 
 

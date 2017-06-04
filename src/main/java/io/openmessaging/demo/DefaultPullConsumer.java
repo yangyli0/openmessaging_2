@@ -16,7 +16,7 @@ public class DefaultPullConsumer implements PullConsumer{
     private KeyValue properties;
     private String queue;
     private List<String> bucketList = new ArrayList<>();
-    //private int curBucket = 0;
+
     private int curProducer = 0;    // producer下标
 
     //private int msgCnt = 0;
@@ -60,8 +60,8 @@ public class DefaultPullConsumer implements PullConsumer{
     public Message pullMessage(String producerId) {
         if (!messageFileMap.containsKey(producerId))
             messageFileMap.put(producerId, new MessageFile(properties, producerId));
-        mapBuf = messageFileMap.get(producerId).getMapBufList().get(0);
 
+        mapBuf = messageFileMap.get(producerId).mappedByteBuffer;
         while (true) {
             int i = mapBuf.position();
             if (i < mapBuf.capacity() && mapBuf.get(i) == 0)    break;

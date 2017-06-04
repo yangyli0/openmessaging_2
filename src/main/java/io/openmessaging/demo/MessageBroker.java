@@ -19,7 +19,7 @@ public class MessageBroker {
     private KeyValue properties;
     private static volatile MessageBroker INSTANCE = null;
     List<String> producerList = new ArrayList<>();
-    public MessageBroker(KeyValue properties)  {
+    private MessageBroker(KeyValue properties)  {
         this.properties = properties;
         getFileSet();
     }
@@ -39,8 +39,6 @@ public class MessageBroker {
             producerList.add(producerFile.getName());
 
     }
-
-
 
 
 
