@@ -4,7 +4,7 @@
 2. 在写每条消息前，先写入该消息的tag(比如TOPIC_1或者QUEUE_1)和消息体的长度
 
 ### 消费过程
-1. 一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;</code>。
+1. 一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;</code>(借鉴自:<https://github.com/kzx1025/Tianchi-OrderDB/blob/master/src/main/java/com/db/table/BuyerOrderTable.java>,这种方式和ByteBuffer相比是很高效的)。
 2. 读的时候一条条的**顺序读**，先查看tag是否在当前消费着订阅表里，如果是读出，如果不是根据消息的长度，跳过本条消息，接着检查下一条.
 
 >写在前面: 
