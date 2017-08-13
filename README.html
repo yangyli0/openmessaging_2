@@ -732,7 +732,8 @@ pre {
 <h3>
 <a id="user-content-消费过程" class="anchor" href="#%E6%B6%88%E8%B4%B9%E8%BF%87%E7%A8%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>消费过程</h3>
 <ol>
-<li>一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;&gt;</code>。</li>
+<li>基于Pull模型，每个消费者主动去自己订阅的主题上拉取消息。</li>
+<li>一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;</code>(借鉴自:<a href="https://github.com/kzx1025/Tianchi-OrderDB/blob/master/src/main/java/com/db/table/BuyerOrderTable.java">https://github.com/kzx1025/Tianchi-OrderDB/blob/master/src/main/java/com/db/table/BuyerOrderTable.java</a>,这种方式和ByteBuffer相比是很高效的)。</li>
 <li>读的时候一条条的<strong>顺序读</strong>，先查看tag是否在当前消费着订阅表里，如果是读出，如果不是根据消息的长度，跳过本条消息，接着检查下一条.</li>
 </ol>
 <blockquote>

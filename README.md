@@ -4,10 +4,11 @@
 2. 在写每条消息前，先写入该消息的tag(比如TOPIC_1或者QUEUE_1)和消息体的长度
 
 ### 消费过程
-1. 一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;</code>(借鉴自:<https://github.com/kzx1025/Tianchi-OrderDB/blob/master/src/main/java/com/db/table/BuyerOrderTable.java>,这种方式和ByteBuffer相比是很高效的)。
-2. 读的时候一条条的**顺序读**，先查看tag是否在当前消费着订阅表里，如果是读出，如果不是根据消息的长度，跳过本条消息，接着检查下一条.
+1. 基于**Pull模型**，每个消费者主动去自己订阅的主题上拉取消息。
+2. 一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;</code>(借鉴自:<https://github.com/kzx1025/Tianchi-OrderDB/blob/master/src/main/java/com/db/table/BuyerOrderTable.java>,这种方式和ByteBuffer相比是很高效的)。
+3. 读的时候一条条的**顺序读**，先查看tag是否在当前消费着订阅表里，如果是读出，如果不是根据消息的长度，跳过本条消息，接着检查下一条.
 
->写在前面: 
+>写在前面:
 > 1. 在开始coding前请仔细阅读以下内容
 
 
@@ -89,6 +90,3 @@ M11,M13,M21,M22,M23,M12 错误，M12与M13的顺序颠倒了；
 * 仅允许依赖JavaSE 8 包含的lib
 * 可以参考别人的实现，拷贝少量的代码
 * 我们会对排名靠前的代码进行review，如果发现大量拷贝别人的代码，将扣分
-
-
-
