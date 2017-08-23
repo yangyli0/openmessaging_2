@@ -5,7 +5,7 @@
 
 ### 消费过程
 1. 基于**Pull模型**，每个消费者主动去自己订阅的主题上拉取消息。
-2. 一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;</code>(借鉴自:<https://github.com/kzx1025/Tianchi-OrderDB/blob/master/src/main/java/com/db/table/BuyerOrderTable.java>,这种方式和ByteBuffer相比是很高效的)。
+2. 一个生产者文件对应一个<code>List&lt;MappedByteBuffer&gt;</code>(该方法**源自**[出处](https://github.com/kzx1025/Tianchi-OrderDB/blob/master/src/main/java/com/db/table/BuyerOrderTable.java),这种方式和ByteBuffer相比是很高效的)。
 3. 读的时候一条条的**顺序读**，先查看tag是否在当前消费着订阅表里，如果是读出，如果不是根据消息的长度，跳过本条消息，接着检查下一条.
 
 >写在前面:
